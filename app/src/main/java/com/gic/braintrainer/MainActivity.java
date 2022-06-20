@@ -1,391 +1,334 @@
 package com.gic.braintrainer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Context;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
+import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
-import android.widget.GridLayout;
+import android.os.Looper;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.Random;
-import java.util.Timer;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.core.content.ContextCompat;
 
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
+import com.gic.braintrainer.progress_bar.RoundedHorizontalProgressBar;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    Button AnswerButton1;
-    Button AnswerButton2;
-    Button AnswerButton3;
-    Button AnswerButton4;
-    TextView questionTextView;
-    TextView TimerTextView;
-    TextView ScoreTextView;
-    TextView WelcomeTextView;
-    TextView LetsGo;
-    TextView Intro;
-    ConstraintLayout cl;
-    int Qrandom1;
-    int Qrandom2;
-    int sign;
-    String m1;
-    String m2;
-    String m3;
-    String m4;
-    CountDownTimer cdt;
-    int Qnumber=1;
-    int Ranumber=1;
-    int FinalRanumber;
-    int FinalQnumber;
+    private Context mContext;
 
-    //GENERATE RANDOM NUMBER METHOD
-    public void GenRanNo() {
+    private AppCompatButton ACB_NEXT;
+    private RoundedHorizontalProgressBar Progress_bar;
+    private TextView TV_Q_COUNTER, TV_WRONG_COUNTER, TV_RIGHT_COUNTER, TV_CURRENT_Q, TV_Q, TV_Opt1, TV_Opt2, TV_Opt3, TV_Opt4;
+    private MotionLayout ML_1, ML_2, ML_3, ML_4, ML_MAIN, ML_CV;
+    private ImageView IV_MAIN, IV_Opt1, IV_Opt2, IV_Opt3, IV_Opt4;
 
-        Random rand = new Random();
+    private LinkedHashMap<String, ArrayList<String>> HM_QA;
+    private ArrayList<String> als_q_list;
+    private ArrayList<String> als_correct_opt;
+    private ArrayList<Integer> als_image_list;
 
-        Qrandom1 = rand.nextInt(20) + 1;
-        Qrandom2 = rand.nextInt(20) + 1;
+    private int WrongCounter = 0, RightCounter = 0, QCounter = 1;
 
-        sign = rand.nextInt(4) + 1;
-
-        if (sign == 1) {
-            AnswerButton1.setTextColor(0xFFED280E);
-            AnswerButton2.setTextColor(0xFFDD0DEC);
-            AnswerButton3.setTextColor(0xFFE16201);
-            AnswerButton4.setTextColor(0xFF00E5FF);
-
-            questionTextView.setText(Qrandom1 + " " + "+" + " " + Qrandom2);
-
-            String ansR = Integer.toString(Qrandom1 + Qrandom2);
-            String ansW = Integer.toString(Qrandom1 + Qrandom2 + 2);
-            String ansW1 = Integer.toString(Qrandom1 + Qrandom2 + 10 - Qrandom2);
-            String ansW2 = Integer.toString(Qrandom1 + 10 - Qrandom2);
-
-            AnswerButton1.setText(ansR);
-            AnswerButton2.setText(ansW);
-            AnswerButton3.setText(ansW1);
-            AnswerButton4.setText(ansW2);
-
-            m1 = "Correct";
-            m2 = "Incorrect";
-            m3 = "Incorrect";
-            m4 = "Incorrect";
-
-        } else if (sign == 2) {
-            AnswerButton1.setTextColor(0xFFDD0DEC);
-            AnswerButton2.setTextColor(0xFFED280E);
-            AnswerButton3.setTextColor(0xFF00E5FF);
-            AnswerButton4.setTextColor(0xFFE16201);
-
-            questionTextView.setText(Qrandom1 + " " + "-" + " " + Qrandom2);
-
-            String ansR = Integer.toString(Qrandom1 - Qrandom2);
-            String ansW = Integer.toString(Qrandom1 - Qrandom2 + 1);
-            String ansW1 = Integer.toString(Qrandom1 - Qrandom2 + 10 - Qrandom2);
-            String ansW2 = Integer.toString(Qrandom1 - 10 - Qrandom2);
-
-            AnswerButton2.setText(ansR);
-            AnswerButton3.setText(ansW);
-            AnswerButton4.setText(ansW1);
-            AnswerButton1.setText(ansW2);
-
-            m2 = "Correct";
-            m1 = "Incorrect";
-            m3 = "Incorrect";
-            m4 = "Incorrect";
-        } else if (sign == 3) {
-            AnswerButton1.setTextColor(0xFFE16201);
-            AnswerButton2.setTextColor(0xFF00E5FF);
-            AnswerButton3.setTextColor(0xFFED280E);
-            AnswerButton4.setTextColor(0xFFDD0DEC);
-
-            questionTextView.setText(Qrandom1 + " " + "*" + " " + Qrandom2);
-
-            String ansR = Integer.toString(Qrandom1 * Qrandom2);
-            String ansW = Integer.toString(Qrandom1 * Qrandom2 + 10 - Qrandom2);
-            String ansW1 = Integer.toString(Qrandom1 * Qrandom2 + 2);
-            String ansW2 = Integer.toString(Qrandom1 * 10 - Qrandom2);
-
-            AnswerButton3.setText(ansR);
-            AnswerButton4.setText(ansW);
-            AnswerButton2.setText(ansW1);
-            AnswerButton1.setText(ansW2);
-
-            m3 = "Correct";
-            m2 = "Incorrect";
-            m1 = "Incorrect";
-            m4 = "Incorrect";
-        } else if (sign == 4) {
-            AnswerButton1.setTextColor(0xFF00E5FF);
-            AnswerButton2.setTextColor(0xFFED280E);
-            AnswerButton3.setTextColor(0xFFDD0DEC);
-            AnswerButton4.setTextColor(0xFFE16201);
-
-            questionTextView.setText(Qrandom1 + " " + "/" + " " + Qrandom2);
-
-            String ansR = Integer.toString(Qrandom1 / Qrandom2);
-            String ansW = Integer.toString(Qrandom1 / Qrandom2 - Qrandom2);
-            String ansW1 = Integer.toString(Qrandom1 / Qrandom2 + 2);
-            String ansW2 = Integer.toString(Qrandom1 / Qrandom2 + 10 - Qrandom2);
-
-            AnswerButton4.setText(ansR);
-            AnswerButton1.setText(ansW);
-            AnswerButton2.setText(ansW1);
-            AnswerButton3.setText(ansW2);
-
-            m4 = "Correct";
-            m1 = "Incorrect";
-            m2 = "Incorrect";
-            m3 = "Incorrect";
-        }
-
-    }
-
-    //BACKGROUND METHODS
-    public void setBgr() {
-
-        cl.setBackgroundResource(R.drawable.greenbg);
-        final Handler handler1r = new Handler();
-        handler1r.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                cl.setBackgroundResource(R.drawable.bluebg);
-            }
-        }, 700);
-
-    }
-
-    public void setBgw() {
-
-        cl.setBackgroundResource(R.drawable.redbg);
-        final Handler handler1 = new Handler();
-        handler1.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                cl.setBackgroundResource(R.drawable.bluebg);
-            }
-        }, 700);
-
-    }
-
-    public void rightAnswer1() {
-         MediaPlayer au1=MediaPlayer.create(MainActivity.this, R.raw.rightans);
-        au1.start();
-
-
-   }
-
-    public void wrongtAnswer1() {
-         MediaPlayer au2=MediaPlayer.create(MainActivity.this, R.raw.wrongans);
-         au2.start();
-
-}
-
-// METHODS FOR COUNTDOWN
-    public void countDownTimer(){
-
-     cdt =   new CountDownTimer(15000, 1000){
-
-            @Override
-            public void onTick(long l) {
-
-
-                updateTimer((int) l/1000);
-            }
-
-            @Override
-            public void onFinish() {
-MediaPlayer aww=MediaPlayer.create(MainActivity.this,R.raw.aww);
-aww.start();
-                AnswerButton1 = (Button) findViewById(R.id.ansb1);
-                AnswerButton2 = (Button) findViewById(R.id.ansb2);
-                AnswerButton3 = (Button) findViewById(R.id.ansb3);
-                AnswerButton4 = (Button) findViewById(R.id.ansb4);
-                questionTextView = (TextView) findViewById(R.id.Qtv);
-                TimerTextView = (TextView) findViewById(R.id.Ttv);
-                ScoreTextView = (TextView) findViewById(R.id.Stv);
-                WelcomeTextView = (TextView) findViewById(R.id.Wtv);
-                cl = (ConstraintLayout) findViewById(R.id.cf);
-                LetsGo = (TextView) findViewById(R.id.lg);
-                Intro = (TextView) findViewById(R.id.in);
-                cl.setBackgroundResource(R.drawable.bg);
-                AnswerButton1.setVisibility(INVISIBLE);
-                AnswerButton2.setVisibility(INVISIBLE);
-                AnswerButton3.setVisibility(INVISIBLE);
-                AnswerButton4.setVisibility(INVISIBLE);
-                questionTextView.setVisibility(INVISIBLE);
-                TimerTextView.setVisibility(INVISIBLE);
-                ScoreTextView.setVisibility(INVISIBLE);
-                WelcomeTextView.setVisibility(INVISIBLE);
-                LetsGo.animate().translationXBy(4000f).setDuration(2000);
-                Intro.animate().translationXBy(4000f).setDuration(2000);
-                LetsGo.setText("Play AGAIN!");
-                GenRanNo();
-              Ranumber=1;
-              Qnumber=1;
-ScoreTextView.setText("");
-            }
-        }.start();
-
-
-    }
-    public void updateTimer(int SecondsLeft){
-        TextView timerTextView = (TextView) findViewById(R.id.Ttv);
-        String sf = Integer.toString(SecondsLeft);
-        timerTextView.setText(sf);
-
-    }
-    //METHOD FOR SCORES
-    public void ScoreR(){
-       FinalQnumber= Qnumber++;
-       FinalRanumber=Ranumber++;
-       ScoreTextView.setText(FinalRanumber + " / " + FinalQnumber );
-    }
-    public void ScoreW(){
-        int FinalQnumber= Qnumber++;
-
-        ScoreTextView.setText(FinalRanumber + " / " + FinalQnumber );
-    }
-    public void rightAnswer10(){
-        String ra10=ScoreTextView.getText().toString();
-        if(ra10.equals("10 / "+ FinalQnumber)){
-            MediaPlayer au3=MediaPlayer.create(MainActivity.this, R.raw.ca10);
-            au3.start();}
-
-    }
-    //BUTTONS IN GRID LAYOUT START FROM HERE-
-    public void ans1(View view) {
-
-
-        if (m1.equals("Correct")) {
-            setBgr();
-            rightAnswer1();
-ScoreR();
-        } else if (m2.equals("Incorrect") || m3.equals("Incorrect") || m4.equals("Incorrect")) {
-            setBgw();
-           wrongtAnswer1();
-            ScoreW();
-        }
-        cdt.cancel();
-        cdt.start();
-        rightAnswer10();
-        GenRanNo();
-    }
-    public void ans2(View view) {
-
-
-        if (m2.equals("Correct")) {
-            rightAnswer1();
-            setBgr();
-            ScoreR();
-
-        } else if (m1.equals("Incorrect") || m3.equals("Incorrect") || m4.equals("Incorrect")){
-             setBgw();
-            wrongtAnswer1();
-            ScoreW();
-        }
-
-        cdt.cancel();
-        cdt.start();
-        rightAnswer10();
-        GenRanNo();
-    }
-    public void ans3(View view) {
-
-
-        if (m3.equals("Correct")) {
-            rightAnswer1();
-             setBgr();
-            ScoreR();
-        } else if (m2.equals("Incorrect") || m1.equals("Incorrect") || m4.equals("Incorrect")){
-            ScoreW();
-            setBgw();
-            wrongtAnswer1();
-        }
-        cdt.cancel();
-        cdt.start();
-        rightAnswer10();
-        GenRanNo();
-    }
-    public void ans4(View view) {
-
-
-        if (m4.equals("Correct")) {
-            rightAnswer1();
-            setBgr();
-            ScoreR();
-        } else if (m2.equals("Incorrect") || m3.equals("Incorrect") || m1.equals("Incorrect")){
-            ScoreW();
-            setBgw();
-            wrongtAnswer1();
-        }
-        cdt.cancel();
-        cdt.start();
-        rightAnswer10();
-        GenRanNo();
-    }
-
-
-
-    public void Start(View view){
-        countDownTimer();
-        AnswerButton1 = (Button) findViewById(R.id.ansb1);
-        AnswerButton2 = (Button) findViewById(R.id.ansb2);
-        AnswerButton3 = (Button) findViewById(R.id.ansb3);
-        AnswerButton4 = (Button) findViewById(R.id.ansb4);
-        questionTextView = (TextView) findViewById(R.id.Qtv);
-        TimerTextView = (TextView) findViewById(R.id.Ttv);
-        ScoreTextView = (TextView) findViewById(R.id.Stv);
-        WelcomeTextView = (TextView) findViewById(R.id.Wtv);
-        cl = (ConstraintLayout) findViewById(R.id.cf);
-        LetsGo = (TextView) findViewById(R.id.lg);
-        Intro = (TextView) findViewById(R.id.in);
-        cl.setBackgroundResource(R.drawable.bluebg);
-        AnswerButton1.setVisibility(VISIBLE);
-        AnswerButton2.setVisibility(VISIBLE);
-        AnswerButton3.setVisibility(VISIBLE);
-        AnswerButton4.setVisibility(VISIBLE);
-        questionTextView.setVisibility(VISIBLE);
-        TimerTextView.setVisibility(VISIBLE);
-        ScoreTextView.setVisibility(VISIBLE);
-        WelcomeTextView.setVisibility(VISIBLE);
-        LetsGo.animate().translationXBy(-4000f).setDuration(2000);
-        Intro.animate().translationXBy(-4000f).setDuration(2000);
-
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
 
-        AnswerButton1 = (Button) findViewById(R.id.ansb1);
-         AnswerButton2 = (Button) findViewById(R.id.ansb2);
-         AnswerButton3 = (Button) findViewById(R.id.ansb3);
-         AnswerButton4 = (Button) findViewById(R.id.ansb4);
-         questionTextView = (TextView) findViewById(R.id.Qtv);
-         TimerTextView = (TextView) findViewById(R.id.Ttv);
-         ScoreTextView = (TextView) findViewById(R.id.Stv);
-         WelcomeTextView = (TextView) findViewById(R.id.Wtv);
-     AnswerButton1.setVisibility(INVISIBLE);
-        AnswerButton2.setVisibility(INVISIBLE);
-        AnswerButton3.setVisibility(INVISIBLE);
-        AnswerButton4.setVisibility(INVISIBLE);
-        questionTextView.setVisibility(INVISIBLE);
-       TimerTextView.setVisibility(INVISIBLE);
-        ScoreTextView.setVisibility(INVISIBLE);
-        WelcomeTextView.setVisibility(INVISIBLE);
+        HM_QA = new LinkedHashMap<>(5);
+        als_correct_opt = new ArrayList<>(5);
+        als_q_list = new ArrayList<>(5);
+        als_image_list = new ArrayList<>(5);
 
-GenRanNo();
+        ACB_NEXT = findViewById(R.id.ACB_NEXT);
+        Progress_bar = findViewById(R.id.PB_MAIN);
+        TV_Q_COUNTER = findViewById(R.id.TV_Q_COMPLETED);
+        TV_WRONG_COUNTER = findViewById(R.id.TV_WRONG_COUNTER);
+        TV_RIGHT_COUNTER = findViewById(R.id.TV_TICK_COUNTER);
+        TV_CURRENT_Q = findViewById(R.id.TV_CURRENT_Q);
+        TV_Q = findViewById(R.id.TV_Q);
+        TV_Opt1 = findViewById(R.id.TV_Opt1);
+        TV_Opt2 = findViewById(R.id.TV_Opt2);
+        TV_Opt3 = findViewById(R.id.TV_Opt3);
+        TV_Opt4 = findViewById(R.id.TV_Opt4);
+        ML_1 = findViewById(R.id.ML_1);
+        ML_2 = findViewById(R.id.ML_2);
+        ML_3 = findViewById(R.id.ML_3);
+        ML_4 = findViewById(R.id.ML_4);
+        ML_MAIN = findViewById(R.id.ML_MAIN);
+        ML_CV = findViewById(R.id.ML_CV);
+        IV_Opt1 = findViewById(R.id.IV_O1_SYMBOL);
+        IV_Opt2 = findViewById(R.id.IV_O2_SYMBOL);
+        IV_Opt3 = findViewById(R.id.IV_O3_SYMBOL);
+        IV_Opt4 = findViewById(R.id.IV_O4_SYMBOL);
+        IV_MAIN = findViewById(R.id.IV_IMAGE);
+        initQALists();
+        OnOptionSelection();
+        OnNextClick();
     }
+
+    private void OnNextClick() {
+        ACB_NEXT.setOnClickListener(view -> {
+            ResetAllOptions();
+            ML_CV.setTransition(R.id.TRANS_RTL);
+            ML_CV.transitionToEnd();
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(() -> {
+                ML_CV.setTransition(R.id.TRANS_LTR);
+                ML_CV.transitionToEnd();
+                ChangeQuestion();
+            }, 1500);
+        });
+    }
+
+    private void ResetAllOptions() {
+        ML_1.setTransition(R.id.TRANS_OPT1);
+        ML_1.transitionToStart();
+        IV_Opt1.animate().alpha(0).start();
+        ML_1.animate().alpha(1).start();
+        TV_Opt1.setTextColor(getResources().getColor(R.color.opt_text_color));
+        ML_1.setBackgroundTintList(null);
+        ML_1.setBackgroundResource(R.drawable.bordered_bg_rounded_20dp);
+
+        ML_2.setTransition(R.id.TRANS_OPT2);
+        ML_2.transitionToStart();
+        IV_Opt2.animate().alpha(0).start();
+        ML_2.animate().alpha(1).start();
+        TV_Opt2.setTextColor(getResources().getColor(R.color.opt_text_color));
+        ML_2.setBackgroundTintList(null);
+        ML_2.setBackgroundResource(R.drawable.bordered_bg_rounded_20dp);
+
+        ML_3.setTransition(R.id.TRANS_OPT3);
+        ML_3.transitionToStart();
+        IV_Opt3.animate().alpha(0).start();
+        ML_3.animate().alpha(1).start();
+        TV_Opt3.setTextColor(getResources().getColor(R.color.opt_text_color));
+        ML_3.setBackgroundTintList(null);
+        ML_3.setBackgroundResource(R.drawable.bordered_bg_rounded_20dp);
+
+        ML_4.setTransition(R.id.TRANS_OPT4);
+        ML_4.transitionToStart();
+        IV_Opt4.animate().alpha(0).start();
+        ML_4.animate().alpha(1).start();
+        TV_Opt4.setTextColor(getResources().getColor(R.color.opt_text_color));
+        ML_4.setBackgroundTintList(null);
+        ML_4.setBackgroundResource(R.drawable.bordered_bg_rounded_20dp);
+
+        TV_Opt1.setEnabled(true);
+        TV_Opt1.setClickable(true);
+        TV_Opt2.setClickable(true);
+        TV_Opt2.setEnabled(true);
+        TV_Opt3.setClickable(true);
+        TV_Opt3.setEnabled(true);
+        TV_Opt4.setClickable(true);
+        TV_Opt4.setEnabled(true);
+    }
+
+    private void ChangeQuestion() {
+        QCounter++;
+        SetDetails();
+    }
+
+    private void OnOptionSelection() {
+
+        TV_Opt1.setOnClickListener(view -> OnOptionClick(R.id.TRANS_OPT1, 1, TV_Opt1, ML_1, IV_Opt1));
+
+        TV_Opt2.setOnClickListener(view -> OnOptionClick(R.id.TRANS_OPT2, 2, TV_Opt2, ML_2, IV_Opt2));
+
+        TV_Opt3.setOnClickListener(view -> OnOptionClick(R.id.TRANS_OPT3, 3, TV_Opt3, ML_3, IV_Opt3));
+
+        TV_Opt4.setOnClickListener(view -> OnOptionClick(R.id.TRANS_OPT4, 4, TV_Opt4, ML_4, IV_Opt4));
+    }
+
+
+    private void OnOptionClick(Integer TRANS_ID, int pos, TextView TV_Opt, MotionLayout ML, ImageView IV) {
+        String correct_ans = als_correct_opt.get(QCounter - 1);
+        if (TextUtils.equals(TV_Opt.getText().toString(), correct_ans)) {
+            RightCounter++;
+            TV_RIGHT_COUNTER.setText(String.valueOf(RightCounter));
+            ML.setTransition(TRANS_ID);
+            ML.transitionToEnd();
+            IV.setImageResource(R.drawable.ic_tick);
+            IV.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.white)));
+
+            TV_Opt.setTextColor(getResources().getColor(R.color.white));
+            ML.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.color_right_answer)));
+
+            ThumbsAnimation(R.id.TRANS_THUMBS_UP);
+            RightAnswerTone();
+            TV_Opt1.setEnabled(false);
+            TV_Opt1.setClickable(false);
+            TV_Opt2.setClickable(false);
+            TV_Opt2.setEnabled(false);
+            TV_Opt3.setClickable(false);
+            TV_Opt3.setEnabled(false);
+            TV_Opt4.setClickable(false);
+            TV_Opt4.setEnabled(false);
+            if (pos != 1) {
+                ML_1.animate().alpha(0.5f).start();
+            }
+            if (pos != 2) {
+                ML_2.animate().alpha(0.5f).start();
+            }
+            if (pos != 3) {
+                ML_3.animate().alpha(0.5f).start();
+            }
+            if (pos != 4) {
+                ML_4.animate().alpha(0.5f).start();
+            }
+        } else {
+            WrongCounter++;
+            TV_WRONG_COUNTER.setText(String.valueOf(WrongCounter));
+            ML.setTransition(TRANS_ID);
+            ML.transitionToEnd();
+            IV.setImageResource(R.drawable.ic_cross);
+            IV.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.white)));
+
+            TV_Opt.setTextColor(getResources().getColor(R.color.white));
+            ML.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.color_wrong_answer)));
+
+            ThumbsAnimation(R.id.TRANS_THUMBS_DOWN);
+            WrongAnsTone();
+        }
+    }
+
+    private void ThumbsAnimation(Integer transitionID) {
+        ML_MAIN.setTransition(transitionID);
+        ML_MAIN.addTransitionListener(new MotionLayout.TransitionListener() {
+            @Override
+            public void onTransitionStarted(MotionLayout motionLayout, int startId, int endId) {
+
+            }
+
+            @Override
+            public void onTransitionChange(MotionLayout motionLayout, int startId, int endId, float progress) {
+
+            }
+
+            @Override
+            public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
+                ML_MAIN.transitionToStart();
+            }
+
+            @Override
+            public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress) {
+
+            }
+        });
+        ML_MAIN.transitionToEnd();
+    }
+
+
+    private void initQALists() {
+        //Q1
+        ArrayList<String> als_temp_1 = new ArrayList<>(4);
+        als_temp_1.add("services, broadcast receivers , activities, content providers");
+        als_temp_1.add("layouts, code, programming language, ui");
+        als_temp_1.add("services, sqlite database, buttons, content providers");
+        als_temp_1.add("activities, code, design, lists");
+
+        HM_QA.put("What are the 4 main components of android?", als_temp_1);
+        als_correct_opt.add("services, broadcast receivers , activities, content providers");
+
+        als_image_list.add(R.drawable.q1);
+
+        //Q2
+        ArrayList<String> als_temp_2 = new ArrayList<>(4);
+        als_temp_2.add("Algorithmic Protocol Interface");
+        als_temp_2.add("Application Programming Interface");
+        als_temp_2.add("Accelerated Programming Interface");
+        als_temp_2.add("None of the above");
+
+        HM_QA.put("API stands for _____", als_temp_2);
+        als_correct_opt.add("Application Programming Interface");
+
+        als_image_list.add(R.drawable.q2);
+
+        //Q3
+        ArrayList<String> als_temp_3 = new ArrayList<>(4);
+        als_temp_3.add("/src");
+        als_temp_3.add("/res/values");
+        als_temp_3.add("/assets");
+        als_temp_3.add("/res/layout");
+
+        HM_QA.put("XML Layout files are stored in _____ directory", als_temp_3);
+        als_correct_opt.add("/res/layout");
+
+        als_image_list.add(R.drawable.q3);
+
+        //Q4
+        ArrayList<String> als_temp_4 = new ArrayList<>(4);
+        als_temp_4.add("Breaks the execution");
+        als_temp_4.add("Breaks the development code");
+        als_temp_4.add("Breaks the application");
+        als_temp_4.add("None of the above");
+
+        HM_QA.put("What is a breakpoint in Android?", als_temp_4);
+        als_correct_opt.add("Breaks the execution");
+
+        als_image_list.add(R.drawable.q4);
+
+        //Q5
+        ArrayList<String> als_temp_5 = new ArrayList<>(4);
+        als_temp_5.add("Bundle()");
+        als_temp_5.add("startActivityForResult()");
+        als_temp_5.add("startActivityToResult()");
+        als_temp_5.add("None of the above");
+
+        HM_QA.put("How to obtain a response from an Android activity?", als_temp_5);
+        als_correct_opt.add("startActivityForResult()");
+        als_q_list = new ArrayList<>(HM_QA.keySet());
+
+        als_image_list.add(R.drawable.q5);
+
+        SetDetails();
+    }
+
+    private void SetDetails() {
+        try {
+
+            TV_Q_COUNTER.setText("Question " + QCounter + "/5");
+            AnimateProgress();
+            IV_MAIN.setImageResource(als_image_list.get(QCounter - 1));
+            TV_CURRENT_Q.setText("Question " + QCounter + ":");
+            TV_Q.setText(als_q_list.get(QCounter - 1));
+            ArrayList<String> temp = new ArrayList<>(Objects.requireNonNull(HM_QA.get(als_q_list.get(QCounter - 1))));
+            TV_Opt1.setText(temp.get(0));
+            TV_Opt2.setText(temp.get(1));
+            TV_Opt3.setText(temp.get(2));
+            TV_Opt4.setText(temp.get(3));
+
+        } catch (RuntimeException e) {
+            Toast.makeText(mContext, "We faced an error! Please try again.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void AnimateProgress() {
+        Progress_bar.animateProgress(2000, Progress_bar.getProgress(), (QCounter) * (100 / 5));
+    }
+
+    public void RightAnswerTone() {
+        MediaPlayer au1 = MediaPlayer.create(MainActivity.this, R.raw.rightans);
+        au1.start();
+
+
+    }
+
+    public void WrongAnsTone() {
+        MediaPlayer au2 = MediaPlayer.create(MainActivity.this, R.raw.wrongans);
+        au2.start();
+
+    }
+
+
 }

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/TRANS_OPT1"
+        motion:constraintSetEnd="@+id/opt1_end"
+        motion:constraintSetStart="@id/opt1_start"
+        motion:duration="1000">
+        <KeyFrameSet />
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_OPT2"
+        motion:constraintSetEnd="@+id/opt2_end"
+        motion:constraintSetStart="@id/opt2_start"
+        motion:duration="1500">
+        <KeyFrameSet />
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_OPT3"
+        motion:constraintSetEnd="@+id/opt3_end"
+        motion:constraintSetStart="@id/opt3_start"
+        motion:duration="1000">
+        <KeyFrameSet />
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_OPT4"
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@+id/opt4_start"
+        motion:constraintSetStart="@id/opt4_end"
+        motion:duration="1500">
+        <KeyFrameSet />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/opt1_start">
+        <Constraint
+            android:id="@+id/IV_O1_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opt1_end">
+
+        <Constraint
+            android:id="@+id/IV_O1_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="1"
+            android:layout_marginStart="10dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/IV_O1_SYMBOL" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opt2_start">
+
+        <Constraint
+            android:id="@+id/IV_O2_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opt2_end">
+
+        <Constraint
+            android:id="@+id/IV_O2_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="1"
+            android:layout_marginStart="10dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/IV_O2_SYMBOL" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opt3_start">
+        <Constraint
+            android:id="@+id/IV_O3_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opt3_end">
+
+        <Constraint
+            android:id="@+id/IV_O3_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="1"
+            android:layout_marginStart="10dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/IV_O3_SYMBOL" />
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opt4_start">
+        <Constraint
+            android:id="@+id/IV_O4_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opt4_end">
+
+        <Constraint
+            android:id="@+id/IV_O4_SYMBOL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="1"
+            android:layout_marginStart="10dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_Opt4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/IV_O4_SYMBOL" />
+
+    </ConstraintSet>
+</MotionScene>

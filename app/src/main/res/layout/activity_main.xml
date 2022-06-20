@@ -1,245 +1,484 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
-    android:id="@+id/cf"
+    android:id="@+id/CL_MAIN"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
+    android:background="@color/color_bg">
 
-    android:background="@drawable/bg"
-    tools:context=".MainActivity">
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/ML_MAIN"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="5dp"
+        app:layoutDescription="@xml/thumbs_scene">
 
-    <TextView
-        android:id="@+id/Qtv"
-        android:layout_width="270dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="98dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="center"
+        <View
+            android:id="@+id/V_BLACK"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:background="#B3000000"
+            android:elevation="5dp" />
 
-        android:shadowColor="#000000"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="10"
-        android:textAlignment="center"
-        android:textColor="#ECCE0D"
-        android:textSize="50sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/V_THUMB_UP"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_marginBottom="20dp"
+            android:alpha="1"
+            android:elevation="5dp"
+            android:src="@drawable/ic_thumbs_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/Ttv"
-        android:layout_width="195dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="9dp"
-        android:background="@drawable/time"
+        <ImageView
+            android:id="@+id/V_THUMB_DOWN"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_marginBottom="20dp"
+            android:alpha="1"
+            android:elevation="5dp"
+            android:src="@drawable/ic_thumbs_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="parent" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
-        android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="10"
-        android:text="30"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="50sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toStartOf="@+id/Stv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
 
     <TextView
-        android:id="@+id/Stv"
-        android:layout_width="195dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/score"
-
+        android:id="@+id/TV_HEADING"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/border_rounded_br_bl_20dp"
+        android:fontFamily="@font/capriola"
         android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="10"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp"
+        android:text="Quiz App"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="50sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Ttv" />
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/gridLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_NEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_rounded_bl_20dp"
+        android:backgroundTint="#FFE08C"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ACB_NEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rounded_bl_20dp"
+            android:backgroundTint="#FFBE0E"
+            android:fontFamily="@font/capriola"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="50dp"
+            android:paddingBottom="10dp"
+            android:text="Next"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/IV_NEXT"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="5dp"
+            android:src="@drawable/ic_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#fff" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/TV_Q_COMPLETED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/capriola"
+        android:padding="5dp"
+        android:text="Question 2/5"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CL_NEXT" />
+
+    <LinearLayout
+        android:id="@+id/LL_COUNTER"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/TV_Q_COMPLETED"
+        app:layout_constraintTop_toBottomOf="@id/CL_NEXT">
+
+        <RelativeLayout
+            android:id="@+id/RL_COUNTER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rounded_20dp"
+            android:backgroundTint="@color/color_wrong_answer"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/IV_CROSS"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_cross"
+                app:tint="#fff" />
+
+            <View
+                android:id="@+id/V_CROSS_DIVIDER"
+                android:layout_width="2dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/IV_CROSS"
+                android:background="#fff" />
+
+            <TextView
+                android:id="@+id/TV_WRONG_COUNTER"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@id/V_CROSS_DIVIDER"
+                android:text="0"
+                android:textColor="#fff"
+                android:textSize="22sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RL_COUNTER_RIGHT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/background_rounded_20dp"
+            android:backgroundTint="@color/color_right_answer"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/IV_TICK"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_tick"
+                app:tint="#fff" />
+
+            <View
+                android:id="@+id/V_TICK_DIVIDER"
+                android:layout_width="2dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/IV_TICK"
+                android:background="#fff" />
+
+            <TextView
+                android:id="@+id/TV_TICK_COUNTER"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@id/V_TICK_DIVIDER"
+                android:text="0"
+                android:textColor="#fff"
+                android:textSize="22sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.gic.braintrainer.progress_bar.RoundedHorizontalProgressBar
+        android:id="@+id/PB_MAIN"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
-        android:layout_height="279dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:progress="0"
+        android:progressBackgroundTint="@color/color_progress_bg"
+        android:progressTint="@color/color_progress"
+        app:isRounded="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/TV_Q_COMPLETED"
+        app:layout_constraintTop_toBottomOf="@id/LL_COUNTER" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_MAIN"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/Ttv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/PB_MAIN">
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Qtv"
-        app:layout_constraintVertical_bias="0.0">
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/ML_CV"
+            app:layoutDescription="@xml/change_question_scene"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/ansb1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:gravity="center"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CV_IMAGE_BG"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:alpha="0"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="5dp"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            android:onClick="ans1"
-            android:shadowColor="#000000"
-            android:shadowDx="10"
-            android:shadowDy="10"
-            android:shadowRadius="10"
-            android:textAlignment="center"
-            android:textColor="#ED280E"
-            android:textSize="50sp"
-            android:textStyle="bold|italic"
-            android:visibility="visible"
-            app:layout_column="0"
-            app:layout_columnWeight="1"
-            app:layout_row="0"
-            app:layout_rowWeight="1" />
+                <ImageView
+                    android:id="@+id/IV_IMAGE"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/redbg" />
+            </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/ansb2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            <TextView
+                android:id="@+id/TV_CURRENT_Q"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/alice"
+                android:padding="5dp"
+                android:text="Question 2:"
+                android:textColor="#A7A7A7"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/CV_IMAGE_BG"
+                app:layout_constraintStart_toStartOf="@id/CV_IMAGE_BG"
+                app:layout_constraintTop_toBottomOf="@id/CV_IMAGE_BG" />
 
-            android:gravity="center"
-            android:onClick="ans2"
-            android:shadowColor="#000000"
-            android:shadowDx="10"
-            android:shadowDy="10"
-            android:shadowRadius="10"
-            android:textAlignment="center"
-            android:textColor="#DD0DEC"
-            android:textSize="50sp"
-            android:textStyle="bold|italic"
-            app:layout_column="1"
-            app:layout_columnWeight="1"
-            app:layout_row="1"
-            app:layout_rowWeight="1" />
+            <TextView
+                android:id="@+id/TV_Q"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/capriola"
+                android:padding="5dp"
+                android:layout_marginStart="10dp"
+                android:text="What are the main components of android?"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/TV_CURRENT_Q"
+                app:layout_constraintStart_toStartOf="@id/TV_CURRENT_Q"
+                app:layout_constraintTop_toBottomOf="@id/TV_CURRENT_Q" />
 
-        <Button
-            android:id="@+id/ansb3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            <ScrollView
+                android:id="@+id/SV_OPTS"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/TV_Q"
+                app:layout_constraintStart_toStartOf="@id/TV_Q"
+                app:layout_constraintTop_toBottomOf="@id/TV_Q">
 
-            android:gravity="center"
-            android:onClick="ans3"
-            android:shadowColor="#000000"
-            android:shadowDx="10"
-            android:shadowDy="10"
-            android:shadowRadius="10"
-            android:textAlignment="center"
-            android:textColor="#E16201"
-            android:textSize="50sp"
-            android:textStyle="bold|italic"
-            app:layout_column="0"
-            app:layout_columnWeight="1"
-            app:layout_row="1"
-            app:layout_rowWeight="1" />
+                <LinearLayout
+                    android:id="@+id/LL_OPTS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
 
-        <Button
-            android:id="@+id/ansb4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+                    <androidx.constraintlayout.motion.widget.MotionLayout
+                        android:id="@+id/ML_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bordered_bg_rounded_20dp"
+                        app:layoutDescription="@xml/option_seletion_scene">
 
-            android:gravity="center"
-            android:onClick="ans4"
-            android:shadowColor="#000000"
-            android:shadowDx="10"
-            android:shadowDy="10"
-            android:shadowRadius="10"
-            android:textAlignment="center"
-            android:textColor="#00E5FF"
-            android:textSize="50sp"
-            android:textStyle="bold|italic"
-            app:layout_column="1"
-            app:layout_columnWeight="1"
-            app:layout_row="0"
-            app:layout_rowWeight="1" />
+                        <ImageView
+                            android:id="@+id/IV_O1_SYMBOL"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_cross"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#fff" />
 
-    </androidx.gridlayout.widget.GridLayout>
+                        <TextView
+                            android:id="@+id/TV_Opt1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center|start"
+                            android:padding="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp"
+                            android:text="layouts, code, design, backend"
+                            android:textAlignment="gravity"
+                            android:textColor="#5E6698"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/Wtv"
-        android:layout_width="367dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="19dp"
-        android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="10"
-        android:text="WELCOME TO BRAIN TRAINER!"
-        android:textAlignment="center"
-        android:textColor="#36EC0D"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.motion.widget.MotionLayout>
 
-    <Button
-        android:id="@+id/lg"
-        android:layout_width="368dp"
-        android:layout_height="137dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="316dp"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:onClick="Start"
-        android:shadowColor="#000000"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="10"
-        android:text="Lets GO!"
-        android:textAlignment="center"
-        android:textColor="#EF0924"
-        android:textSize="50dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.motion.widget.MotionLayout
+                        android:id="@+id/ML_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bordered_bg_rounded_20dp"
+                        app:layoutDescription="@xml/option_seletion_scene">
 
-    <TextView
-        android:id="@+id/in"
-        android:layout_width="354dp"
-        android:layout_height="185dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="33dp"
-        android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="10"
-        android:text="Hello! Let's Train Your Brain!"
-        android:textAlignment="center"
-        android:textColor="#46EF09"
-        android:textSize="50dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                        <ImageView
+                            android:id="@+id/IV_O2_SYMBOL"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_cross"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#fff" />
 
+                        <TextView
+                            android:id="@+id/TV_Opt2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center|start"
+                            android:padding="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp"
+                            android:text="layouts, code, design, backend"
+                            android:textAlignment="gravity"
+                            android:textColor="#5E6698"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+                    <androidx.constraintlayout.motion.widget.MotionLayout
+                        android:id="@+id/ML_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bordered_bg_rounded_20dp"
+                        app:layoutDescription="@xml/option_seletion_scene">
+
+                        <ImageView
+                            android:id="@+id/IV_O3_SYMBOL"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_cross"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#fff" />
+
+                        <TextView
+                            android:id="@+id/TV_Opt3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center|start"
+                            android:padding="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp"
+                            android:text="layouts, code, design, backend"
+                            android:textAlignment="gravity"
+                            android:textColor="#5E6698"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+                    <androidx.constraintlayout.motion.widget.MotionLayout
+                        android:id="@+id/ML_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bordered_bg_rounded_20dp"
+                        app:layoutDescription="@xml/option_seletion_scene">
+
+                        <ImageView
+                            android:id="@+id/IV_O4_SYMBOL"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_cross"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#fff" />
+
+                        <TextView
+                            android:id="@+id/TV_Opt4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center|start"
+                            android:padding="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp"
+                            android:text="layouts, code, design, backend"
+                            android:textAlignment="gravity"
+                            android:textColor="#5E6698"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

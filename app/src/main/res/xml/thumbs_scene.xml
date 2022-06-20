@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/TRANS_THUMBS_UP"
+        motion:constraintSetEnd="@+id/thumb_up_end"
+        motion:constraintSetStart="@id/thumb_up_start"
+        motion:duration="1500">
+        <KeyFrameSet />
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_THUMBS_DOWN"
+        motion:constraintSetEnd="@+id/thumb_down_end"
+        motion:constraintSetStart="@id/thumb_down_start"
+        motion:duration="1500">
+        <KeyFrameSet />
+    </Transition>
+    <ConstraintSet android:id="@+id/thumb_up_start">
+        <Constraint
+            android:id="@+id/V_BLACK"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:elevation="5dp" />
+
+        <Constraint
+            android:id="@+id/V_THUMB_UP"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_marginBottom="20dp"
+            android:alpha="0"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toEndOf="parent" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/thumb_up_end">
+
+        <Constraint
+            android:id="@+id/V_BLACK"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1"
+            android:elevation="5dp" />
+
+        <Constraint
+            android:id="@+id/V_THUMB_UP"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:alpha="1"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/thumb_down_start">
+        <Constraint
+            android:id="@+id/V_BLACK"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:elevation="5dp" />
+
+        <Constraint
+            android:id="@+id/V_THUMB_DOWN"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_marginBottom="20dp"
+            android:alpha="0"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent" />
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/thumb_down_end">
+
+        <Constraint
+            android:id="@+id/V_BLACK"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1"
+            android:elevation="5dp" />
+
+        <Constraint
+            android:id="@+id/V_THUMB_DOWN"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:alpha="1"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+    </ConstraintSet>
+</MotionScene>
